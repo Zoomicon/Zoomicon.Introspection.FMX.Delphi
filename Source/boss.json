@@ -8,6 +8,7 @@
     "license": "MIT",
 
     "dependencies": {
+        "github.com/zoomicon/zoomicon.helpers.rtl.delphi": ">0.0.0",
         "github.com/zoomicon/zoomicon.helpers.fmx.delphi": ">0.0.0"
     },
 
