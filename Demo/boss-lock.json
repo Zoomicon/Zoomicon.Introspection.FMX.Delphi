@@ -1,11 +1,11 @@
 {
-	"hash": "99981a420efa2d2560a100ea94e72b76",
-	"updated": "2024-12-04T19:40:06.7800756+02:00",
+	"hash": "2a821709de68b202f6d76a70b20d60a0",
+	"updated": "2024-12-04T23:47:20.0718894+02:00",
 	"installedModules": {
 		"github.com/zoomicon/zoomicon.introspection.fmx.delphi": {
 			"name": "zoomicon.introspection.fmx.delphi",
-			"version": "main",
-			"hash": "44abb247526b5a7d961b821344c4ef6c",
+			"version": "1.0",
+			"hash": "7c1fea9dd9513b5ec7fa0e0740218447",
 			"artifacts": {},
 			"failed": false,
 			"changed": false

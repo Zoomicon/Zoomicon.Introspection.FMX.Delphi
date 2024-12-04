@@ -22,6 +22,7 @@
     "projects": [
       "Source/Zoomicon.Introspection.FMX.dproj"
     ],
+
     "files": [
       "Source/**/*.pas"
     ]

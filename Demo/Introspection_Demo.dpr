@@ -1,4 +1,4 @@
-program StructureViewer_Demo;
+program Introspection_Demo;
 
 uses
   System.StartUpCopy,
