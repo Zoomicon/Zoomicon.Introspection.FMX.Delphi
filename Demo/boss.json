@@ -1,0 +1,20 @@
+{
+  "name": "StructureViewer_Demo",
+  "description": "Zoomicon Introspection FMX Demo app",
+  "version": "1.0",
+
+  "homepage": "https://github.com/Zoomicon/Zoomicon.Introspection.FMX.Delphi/Demo",
+
+  "author": "George Birbilis - Zoomicon.com",
+  "license": "MIT",
+
+  "dependencies": {
+    "github.com/zoomicon/zoomicon.introspection.fmx.delphi": ">0.0.0"
+  }
+
+  "mainsrc": ".",
+
+  "projects": [
+    "StructureViewer_Demo.dproj"
+  ],
+}

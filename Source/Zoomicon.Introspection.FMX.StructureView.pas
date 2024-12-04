@@ -4,147 +4,152 @@
 unit Zoomicon.Introspection.FMX.StructureView;
 
 interface
-
-uses
-  System.Classes, //for TComponent, GroupDecendentsWith, RegisterComponents
-  System.Contnrs, //for TClassList
-  System.Generics.Collections, //for TList
-  System.SysUtils,
-  System.Types,
-  System.Variants,
-  System.ImageList,
-  FMX.Controls, //for TControl
-  FMX.Graphics,
-  FMX.Forms, //for TFrame
-  FMX.ImgList, //for TImageList
-  FMX.Layouts,
-  FMX.TreeView,
-  FMX.Types; //for RegisterFmxClasses
-
-type
-  TTreeFilterMode = (tfFlatten, tfPrune);
-
-const
-  {$region 'Defaults'}
-
-  DEFAULT_SHOW_ONLY_VISIBLE = true;
-  DEFAULT_SHOW_ONLY_NAMED = true;
-  DEFAULT_SHOW_NAMES = false;
-  DEFAULT_SHOW_TYPES = false;
-  DEFAULT_SHOW_HINT_NAMES = true;
-  DEFAULT_SHOW_HINT_TYPES = false;
-  DEFAULT_FILTER_MODE = tfPrune;
-  DEFAULT_DRAGDROP_REORDER = false; //acting as structure viewer, not editor by default
-  DEFAULT_DRAGDROP_REPARENT = false; //acting as structure viewer, not editor by default
-  DEFAULT_DRAGDROP_SELECTTARGET = true; //on drop, target is selected
-
+  {$region 'Used units'}
+  uses
+    System.Classes, //for TComponent, GroupDecendentsWith, RegisterComponents
+    System.Contnrs, //for TClassList
+    System.Generics.Collections, //for TList
+    System.SysUtils,
+    System.Types,
+    System.Variants,
+    System.ImageList,
+    //
+    FMX.Controls, //for TControl
+    FMX.Graphics,
+    FMX.Forms, //for TFrame
+    FMX.ImgList, //for TImageList
+    FMX.Layouts,
+    FMX.TreeView,
+    FMX.Types; //for RegisterFmxClasses
   {$endregion}
 
-type
-  //TClassList = TList<TClass>; //using old-style (non Generic) "TClassList" from System.Contnrs instead
+  type
+    TTreeFilterMode = (tfFlatten, tfPrune);
 
-  TRestructuringOperation = (roReorderedChildren, roAddedChild, roRemovedChild);
+  const
+    {$region 'Defaults'}
 
-  TSelectionEvent = procedure(Sender: TObject; const Selection: TObject) of object;
-  TRestructuringEvent = procedure(Sender: TObject; const RestructuredChild: TObject; const RestructuredParent: TObject; const Operation: TRestructuringOperation) of object;
-  TShowFilterEvent = procedure(Sender: TObject; const TheObject: TObject; var ShowObject: Boolean) of object;
+    DEFAULT_SHOW_ONLY_VISIBLE = true;
+    DEFAULT_SHOW_ONLY_NAMED = true;
+    DEFAULT_SHOW_NAMES = false;
+    DEFAULT_SHOW_TYPES = false;
+    DEFAULT_SHOW_HINT_NAMES = true;
+    DEFAULT_SHOW_HINT_TYPES = false;
+    DEFAULT_FILTER_MODE = tfPrune;
+    DEFAULT_DRAGDROP_REORDER = false; //acting as structure viewer, not editor by default
+    DEFAULT_DRAGDROP_REPARENT = false; //acting as structure viewer, not editor by default
+    DEFAULT_DRAGDROP_SELECTTARGET = true; //on drop, target is selected
 
-  {$REGION 'TStructureView' --------------------------------------------------------}
+    {$endregion}
 
-  TStructureView = class(TFrame, IFreeNotification)
-    TreeView: TTreeView;
-    ImageList: TImageList;
-    procedure TreeViewChange(Sender: TObject);
-    procedure TreeViewDragChange(SourceItem, DestItem: TTreeViewItem; var Allow: Boolean);
-  protected
-    FGUIRoot: TControl;
-    {ShowXX}
-    FShowOnlyClasses: TClassList;
-    FShowOnlyNamed: Boolean;
-    FShowOnlyVisible: Boolean;
-    FShowNames: Boolean;
-    FShowTypes: Boolean;
-    FShowHintNames: Boolean;
-    FShowHintTypes: Boolean;
-    FFilterMode: TTreeFilterMode;
-    {DragDropXX}
-    FDragDropReorder: Boolean;
-    FDragDropReparent: Boolean;
-    FDragDropSelectTarget: Boolean;
-    {Events}
-    FOnSelection: TSelectionEvent;
-    FOnRestructuring: TRestructuringEvent;
-    FOnShowFilter: TShowFilterEvent;
+  type
+    //TClassList = TList<TClass>; //using old-style (non Generic) "TClassList" from System.Contnrs instead
 
-    {GUIRoot}
-    procedure SetGUIRoot(const Value: TControl); virtual;
-    procedure LoadTreeView; virtual;
-    {ItemHeight}
-    function GetItemHeight: Single; virtual;
-    procedure SetItemHeight(const Value: Single); virtual;
-    {ShowXX}
-    function GetShowCheckboxes: Boolean; virtual;
-    procedure SetShowCheckboxes(const Value: Boolean); virtual;
-    procedure SetShowOnlyClasses(const Value: TClassList); virtual;
-    procedure SetShowOnlyVisible(const Value: Boolean); virtual;
-    procedure SetShowOnlyNamed(const Value: Boolean); virtual;
-    procedure SetShowNames(const Value: Boolean); virtual;
-    procedure SetShowTypes(const Value: Boolean); virtual;
-    procedure SetShowHintNames(const Value: Boolean); virtual;
-    procedure SetShowHintTypes(const Value: Boolean); virtual;
-    {DragDropXX}
-    procedure SetDragDropReorder(const Value: Boolean); virtual;
-    procedure SetDragDropReparent(const Value: Boolean); virtual;
-    {SelectedItem}
-    function GetSelectedObject: TObject; virtual;
-    procedure SetSelectedObject(const Value: TObject); virtual;
+    TRestructuringOperation = (roReorderedChildren, roAddedChild, roRemovedChild);
 
-    {Notifications}
-    procedure Notification(AComponent: TComponent; Operation: TOperation); override; //no need to override the method "FreeNotification", TComponent and TFmxObject implement IFreeNotification, the latter calling Notification with Operation=opRemove
+    TSelectionEvent = procedure(Sender: TObject; const Selection: TObject) of object;
+    TRestructuringEvent = procedure(Sender: TObject; const RestructuredChild: TObject; const RestructuredParent: TObject; const Operation: TRestructuringOperation) of object;
+    TShowFilterEvent = procedure(Sender: TObject; const TheObject: TObject; var ShowObject: Boolean) of object;
 
-  public
-    constructor Create(AOwner: TComponent); override;
-    destructor Destroy; override;
+    {$REGION 'TStructureView' --------------------------------------------------------}
 
-  published
-    //Properties//
-    property GUIRoot: TControl read FGUIRoot write SetGUIRoot;
+    TStructureView = class(TFrame, IFreeNotification)
+      TreeView: TTreeView;
+      ImageList: TImageList;
+      procedure TreeViewChange(Sender: TObject);
+      procedure TreeViewDragChange(SourceItem, DestItem: TTreeViewItem; var Allow: Boolean);
+    protected
+      FGUIRoot: TControl;
+      {ShowXX}
+      FShowOnlyClasses: TClassList;
+      FShowOnlyNamed: Boolean;
+      FShowOnlyVisible: Boolean;
+      FShowNames: Boolean;
+      FShowTypes: Boolean;
+      FShowHintNames: Boolean;
+      FShowHintTypes: Boolean;
+      FFilterMode: TTreeFilterMode;
+      {DragDropXX}
+      FDragDropReorder: Boolean;
+      FDragDropReparent: Boolean;
+      FDragDropSelectTarget: Boolean;
+      {Events}
+      FOnSelection: TSelectionEvent;
+      FOnRestructuring: TRestructuringEvent;
+      FOnShowFilter: TShowFilterEvent;
 
-    property ItemHeight: Single read GetItemHeight write SetItemHeight;
-    property ShowCheckboxes: Boolean read GetShowCheckboxes write SetShowCheckboxes default false;
-    property ShowOnlyClasses: TClassList read FShowOnlyClasses write SetShowOnlyClasses; //default nil
-    property ShowOnlyVisible: Boolean read FShowOnlyVisible write SetShowOnlyVisible default DEFAULT_SHOW_ONLY_VISIBLE;
-    property ShowOnlyNamed: Boolean read FShowOnlyNamed write SetShowOnlyNamed default DEFAULT_SHOW_ONLY_NAMED;
-    property ShowNames: Boolean read FShowNames write SetShowNames default DEFAULT_SHOW_NAMES;
-    property ShowTypes: Boolean read FShowTypes write SetShowTypes default DEFAULT_SHOW_TYPES;
-    property ShowHintNames: Boolean read FShowHintNames write SetShowHintNames default DEFAULT_SHOW_HINT_NAMES;
-    property ShowHintTypes: Boolean read FShowHintTypes write SetShowHintTypes default DEFAULT_SHOW_HINT_TYPES;
-    property FilterMode: TTreeFilterMode read FFilterMode write FFilterMode default DEFAULT_FILTER_MODE;
+      {GUIRoot}
+      procedure SetGUIRoot(const Value: TControl); virtual;
+      procedure LoadTreeView; virtual;
+      {ItemHeight}
+      function GetItemHeight: Single; virtual;
+      procedure SetItemHeight(const Value: Single); virtual;
+      {ShowXX}
+      function GetShowCheckboxes: Boolean; virtual;
+      procedure SetShowCheckboxes(const Value: Boolean); virtual;
+      procedure SetShowOnlyClasses(const Value: TClassList); virtual;
+      procedure SetShowOnlyVisible(const Value: Boolean); virtual;
+      procedure SetShowOnlyNamed(const Value: Boolean); virtual;
+      procedure SetShowNames(const Value: Boolean); virtual;
+      procedure SetShowTypes(const Value: Boolean); virtual;
+      procedure SetShowHintNames(const Value: Boolean); virtual;
+      procedure SetShowHintTypes(const Value: Boolean); virtual;
+      {DragDropXX}
+      procedure SetDragDropReorder(const Value: Boolean); virtual;
+      procedure SetDragDropReparent(const Value: Boolean); virtual;
+      {SelectedItem}
+      function GetSelectedObject: TObject; virtual;
+      procedure SetSelectedObject(const Value: TObject); virtual;
 
-    property DragDropReorder: Boolean read FDragDropReorder write SetDragDropReorder default DEFAULT_DRAGDROP_REORDER;
-    property DragDropReparent: Boolean read FDragDropReparent write SetDragDropReparent default DEFAULT_DRAGDROP_REPARENT;
-    property DragDropSelectTarget: Boolean read FDragDropSelectTarget write FDragDropSelectTarget default DEFAULT_DRAGDROP_SELECTTARGET;
+      {Notifications}
+      procedure Notification(AComponent: TComponent; Operation: TOperation); override; //no need to override the method "FreeNotification", TComponent and TFmxObject implement IFreeNotification, the latter calling Notification with Operation=opRemove
 
-    property SelectedObject: TObject read GetSelectedObject write SetSelectedObject; //default nil
+    public
+      constructor Create(AOwner: TComponent); override;
+      destructor Destroy; override;
 
-    //Events//
-    property OnShowFilter: TShowFilterEvent read FOnShowFilter write FOnShowFilter;
-    property OnSelection: TSelectionEvent read FOnSelection write FOnSelection;
-    property OnRestructuring: TRestructuringEvent read FOnRestructuring write FOnRestructuring;
-  end;
+    published
+      //Properties//
+      property GUIRoot: TControl read FGUIRoot write SetGUIRoot;
 
-  {$ENDREGION ......................................................................}
+      property ItemHeight: Single read GetItemHeight write SetItemHeight;
+      property ShowCheckboxes: Boolean read GetShowCheckboxes write SetShowCheckboxes default false;
+      property ShowOnlyClasses: TClassList read FShowOnlyClasses write SetShowOnlyClasses; //default nil
+      property ShowOnlyVisible: Boolean read FShowOnlyVisible write SetShowOnlyVisible default DEFAULT_SHOW_ONLY_VISIBLE;
+      property ShowOnlyNamed: Boolean read FShowOnlyNamed write SetShowOnlyNamed default DEFAULT_SHOW_ONLY_NAMED;
+      property ShowNames: Boolean read FShowNames write SetShowNames default DEFAULT_SHOW_NAMES;
+      property ShowTypes: Boolean read FShowTypes write SetShowTypes default DEFAULT_SHOW_TYPES;
+      property ShowHintNames: Boolean read FShowHintNames write SetShowHintNames default DEFAULT_SHOW_HINT_NAMES;
+      property ShowHintTypes: Boolean read FShowHintTypes write SetShowHintTypes default DEFAULT_SHOW_HINT_TYPES;
+      property FilterMode: TTreeFilterMode read FFilterMode write FFilterMode default DEFAULT_FILTER_MODE;
 
-procedure Register;
+      property DragDropReorder: Boolean read FDragDropReorder write SetDragDropReorder default DEFAULT_DRAGDROP_REORDER;
+      property DragDropReparent: Boolean read FDragDropReparent write SetDragDropReparent default DEFAULT_DRAGDROP_REPARENT;
+      property DragDropSelectTarget: Boolean read FDragDropSelectTarget write FDragDropSelectTarget default DEFAULT_DRAGDROP_SELECTTARGET;
+
+      property SelectedObject: TObject read GetSelectedObject write SetSelectedObject; //default nil
+
+      //Events//
+      property OnShowFilter: TShowFilterEvent read FOnShowFilter write FOnShowFilter;
+      property OnSelection: TSelectionEvent read FOnSelection write FOnSelection;
+      property OnRestructuring: TRestructuringEvent read FOnRestructuring write FOnRestructuring;
+    end;
+
+    {$ENDREGION ......................................................................}
+
+  procedure Register;
 
 implementation
+  {$region 'Used units'}
   uses
     System.UITypes, //for TDragMode
     System.Rtti, //for TValue
+    //
     Zoomicon.Helpers.RTL.ClassListHelpers, //for TClassList.FindClassOf
     Zoomicon.Helpers.FMX.Controls.ControlHelper, //for TControl.MakeThumbnail
     Zoomicon.Helpers.FMX.ImgList.ImageListHelpers, //for TImageListAddBitmapHelper
     Zoomicon.Helpers.FMX.TreeView.TreeViewHelpers; //for TTreeViewItemSearchHelper
+  {$endregion}
 
 {$R *.fmx}
 
