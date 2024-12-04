@@ -1,0 +1,28 @@
+{
+  "package": {
+    "name": "Zoomicon.Introspection.FMX",
+    "version": "1.0",
+
+    "description": "Introspection User Interface controls for Delphi FMX",
+
+    "author": "George Birbilis - Zoomicon.com",
+    "license": "MIT",
+
+    "dependencies": {
+        "github.com/zoomicon/zoomicon.helpers.fmx.delphi": ">0.0.0"
+    },
+
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Zoomicon/Zoomicon.Introspection.FMX.Delphi"
+    },
+    "main": "Source/Zoomicon.Introspection.FMX.dproj",
+
+    "projects": [
+      "Source/Zoomicon.Introspection.FMX.dproj"
+    ],
+    "files": [
+      "Source/**/*.pas"
+    ]
+  }
+}
