@@ -31,10 +31,14 @@ requires
   rtl,
   fmx,
   Zoomicon.Helpers.RTL,
-  Zoomicon.Helpers.FMX;
+  Zoomicon.Helpers.FMX,
+  vcl,
+  CodeSiteExpressPkg,
+  ObjectDebuggerFMX;
 
 contains
-  Zoomicon.Introspection.FMX.StructureView in 'Zoomicon.Introspection.FMX.StructureView.pas' {StructureView: TFrame};
+  Zoomicon.Introspection.FMX.StructureView in 'Zoomicon.Introspection.FMX.StructureView.pas' {StructureView: TFrame},
+  Zoomicon.Introspection.FMX.Debugging in 'Zoomicon.Introspection.FMX.Debugging.pas';
 
 {$Description 'Zoomicon Introspection FMX Controls'}
 

@@ -1,6 +1,6 @@
 {
   "name": "Zoomicon.Introspection.FMX",
-  "version": 3.0",
+  "version": "3.1",
 
   "description": "Introspection User Interface controls for Delphi FMX",
 
@@ -8,8 +8,9 @@
   "license": "MIT",
 
   "dependencies": {
-     "github.com/zoomicon/zoomicon.helpers.rtl.delphi": ">=3.0.0",
-     "github.com/zoomicon/zoomicon.helpers.fmx.delphi": ">=3.0.0"
+    "github.com/zoomicon/zoomicon.helpers.rtl.delphi": ">=3.0.0",
+    "github.com/zoomicon/zoomicon.helpers.fmx.delphi": ">=3.0.0",
+    "github.com/birbilis/object-debugger-for-firemonkey": ">=6.1.0"
   },
 
   "repository": {
