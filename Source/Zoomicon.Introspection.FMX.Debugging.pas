@@ -6,7 +6,7 @@ interface
     System.Diagnostics, //for TStopWatch
     System.SysUtils; //for Exception, FreeAndNil, Format
 
-  procedure CheckSafeMode;
+  procedure CheckSafeMode; //must call before Application.Initialize
 
   procedure InitObjectDebugger(const AOwner: TComponent);
   procedure FreeObjectDebugger;
@@ -24,32 +24,60 @@ interface
 implementation
   uses
   {$IF DEFINED(MSWINDOWS)}Windows,{$ENDIF} //for GetKeyState
+  {$IF DEFINED(MACOS)}Macapi.Carbon,{$ENDIF}
   {$IFDEF DEBUG}
     {$IF DEFINED(MSWINDOWS)}
     CodeSiteLogging,
     Zoomicon.Helpers.FMX.Forms.ApplicationHelper, //for Application.ExeName
     {$ENDIF }
-  FormMessage,
-  ObjectDebuggerFMXForm,
+  FormMessage, //for MessageForm (Object-Debugger-for-Firemonkey)
+  ObjectDebuggerFMXForm, //for ObjectDebuggerFMXForm1 (Object-Debugger-for-Firemonkey)
   {$ENDIF}
   FMX.Forms, //for Application
-  FMX.Types; //for GlobalUseDX
+  FMX.Skia, //for GlobalUseSkia, GlobalUseSkiaRasterWhenAvailable
+  FMX.Types; //for GlobalUseDX, GlobalUseMetal, GlobalUseVulkan
 
 resourcestring
  STR_ELAPSED_MSEC = 'Elapsed msec: %d';
  STR_ELAPSED_TICKS = 'Elapsed Ticks: %d';
 
-{$region 'Graphics SafeMode'}
+{$region 'Graphics Initialization / SafeMode'}
 
-procedure CheckSafeMode;
+function IsShiftKeyPressed: Boolean;
 begin
   {$IF DEFINED(MSWINDOWS)}
-  if (GetKeyState(VK_SHIFT) < 0) then
-  begin
-    //GlobalUseDX10 := False; //must do before Application.Initialize //use DX9 instead of DX10
-    GlobalUseDX := False; //must do before Application.Initialize //use GDI, no h/w acceleration
-  end;
+  Result := (GetKeyState(VK_SHIFT) < 0);
+  {$ELSEIF DEFINED(MACOS)}
+  var KeyMap: array[0..15] of UInt32;
+  GetKeys(KeyMap); //TODO: check if working on OS-X and if deprectated //TODO: since MACOS symbol is also defined for iOS, check it doens't cause issue else use AND NOT DEFINED(IOS) above
+  Result := (KeyMap[0] and (1 shl 9)) <> 0; // Check the Shift key bit
+  {$ELSE}
+  Result := False;
   {$ENDIF}
+end;
+
+procedure CheckSafeMode; //must call before Application.Initialize
+begin
+  if isShiftKeyPressed then //Hold down SHIFT key at app startup to disable H/W acceleration and other optimizations
+  begin
+    {$IF DEFINED(MSWINDOWS)}
+    //GlobalUseDX10 := False; //use DX9 instead of DX10 (probably needs GlobalUseDX=true to do something)
+    GlobalUseDX := False; //must do before Application.Initialize //use GDI, no h/w acceleration
+    {$ENDIF}
+    GlobalUseSkia := False;
+    GlobalUseVulkan := False;
+    GlobalUseMetal := False;
+  end
+  else
+  begin
+    GlobalUseSkia := True; //replace FMX rendering engine with Skia
+    GlobalUseSkiaRasterWhenAvailable := False;
+    {$IF DEFINED(MSWINDOWS) OR DEFINED(ANDROID)} //GlobalUseVulkan=true is the default on Android, checking for that for completness (for MSWindows need to combine with GlobalUseSkiaRasterWhenAvailable=False to enable if available)
+    GlobalUseVulkan := True;
+    {$ELSEIF DEFINED(MACOS) OR DEFINED(IOS)} //on iOS Delphi also defines MACOS symbol, but using OR for clarity (if we want to check separately need to first check for IOS and use ELSEIF to then check for MACOS)
+    GlobalUseMetal := True;
+    {$ENDIF}
+  end;
 end;
 
 {$endregion}

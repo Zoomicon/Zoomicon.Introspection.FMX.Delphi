@@ -34,7 +34,9 @@ requires
   Zoomicon.Helpers.FMX,
   vcl,
   CodeSiteExpressPkg,
-  ObjectDebuggerFMX;
+  ObjectDebuggerFMX,
+  Skia.Package.RTL,
+  Skia.Package.FMX;
 
 contains
   Zoomicon.Introspection.FMX.StructureView in 'Zoomicon.Introspection.FMX.StructureView.pas' {StructureView: TFrame},
