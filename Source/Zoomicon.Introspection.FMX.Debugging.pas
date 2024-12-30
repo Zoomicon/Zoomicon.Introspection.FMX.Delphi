@@ -24,7 +24,7 @@ interface
 implementation
   uses
   {$IF DEFINED(MSWINDOWS)}Windows,{$ENDIF} //for GetKeyState
-  {$IF DEFINED(MACOS)}Macapi.Carbon,{$ENDIF}
+  //{$IF DEFINED(MACOS)}Macapi.Carbon,{$ENDIF} //Delphi doesn't have Carbon API support, need something for Cocoa
   {$IFDEF DEBUG}
     {$IF DEFINED(MSWINDOWS)}
     CodeSiteLogging,
@@ -47,10 +47,12 @@ function IsShiftKeyPressed: Boolean;
 begin
   {$IF DEFINED(MSWINDOWS)}
   Result := (GetKeyState(VK_SHIFT) < 0);
+  (* //Delphi doesn't have Carbon API support, need something for Cocoa
   {$ELSEIF DEFINED(MACOS)}
   var KeyMap: array[0..15] of UInt32;
   GetKeys(KeyMap); //TODO: check if working on OS-X and if deprectated //TODO: since MACOS symbol is also defined for iOS, check it doens't cause issue else use AND NOT DEFINED(IOS) above
   Result := (KeyMap[0] and (1 shl 9)) <> 0; // Check the Shift key bit
+  *)
   {$ELSE}
   Result := False;
   {$ENDIF}

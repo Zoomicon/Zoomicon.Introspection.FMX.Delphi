@@ -30,13 +30,14 @@ package Zoomicon.Introspection.FMX;
 requires
   rtl,
   fmx,
-  Zoomicon.Helpers.RTL,
-  Zoomicon.Helpers.FMX,
-  vcl,
-  CodeSiteExpressPkg,
-  ObjectDebuggerFMX,
   Skia.Package.RTL,
-  Skia.Package.FMX;
+  Skia.Package.FMX,
+  {$IF DEFINED(MSWINDOWS)}
+  CodeSiteExpressPkg,
+  {$ENDIF}
+  ObjectDebuggerFMX,
+  Zoomicon.Helpers.RTL,
+  Zoomicon.Helpers.FMX;
 
 contains
   Zoomicon.Introspection.FMX.StructureView in 'Zoomicon.Introspection.FMX.StructureView.pas' {StructureView: TFrame},
