@@ -1,27 +1,37 @@
 unit Zoomicon.Introspection.FMX.Debugging;
 
 interface
+  {$region 'Used units'}
   uses
     System.Classes, //for TComponent
     System.Diagnostics, //for TStopWatch
     System.SysUtils; //for Exception, FreeAndNil, Format
+  {$endregion}
 
+  //Keyboard flags
+  function IsShiftKeyPressed: Boolean;
+
+  //Graphics Initialization / SafeMode
   procedure CheckSafeMode; //must call before Application.Initialize
 
+  //Object Inspector
   procedure InitObjectDebugger(const AOwner: TComponent);
   procedure FreeObjectDebugger;
   procedure ToggleObjectDebuggerVisibility;
 
+  //Logging
   procedure Log(const Format: String; const Args: array of const); overload;
   procedure Log(const Msg: String); overload;
   procedure Log(const E: Exception); overload;
 
+  //Profiling
   function StartTiming: TStopWatch;
   procedure StopTiming;
   function StopTiming_msec: Int64;
   function StopTiming_Ticks: Int64;
 
 implementation
+  {$region 'Used units'}
   uses
   {$IF DEFINED(MSWINDOWS)}Windows,{$ENDIF} //for GetKeyState
   //{$IF DEFINED(MACOS)}Macapi.Carbon,{$ENDIF} //Delphi doesn't have Carbon API support, need something for Cocoa
@@ -36,12 +46,13 @@ implementation
   FMX.Forms, //for Application
   FMX.Skia, //for GlobalUseSkia, GlobalUseSkiaRasterWhenAvailable
   FMX.Types; //for GlobalUseDX, GlobalUseMetal, GlobalUseVulkan
+  {$endregion}
 
 resourcestring
  STR_ELAPSED_MSEC = 'Elapsed msec: %d';
  STR_ELAPSED_TICKS = 'Elapsed Ticks: %d';
 
-{$region 'Graphics Initialization / SafeMode'}
+{$region 'Keyboard flags'}
 
 function IsShiftKeyPressed: Boolean;
 begin
@@ -58,9 +69,13 @@ begin
   {$ENDIF}
 end;
 
+{$endregion}
+
+{$region 'Graphics Initialization / SafeMode'}
+
 procedure CheckSafeMode; //must call before Application.Initialize
 begin
-  if isShiftKeyPressed then //Hold down SHIFT key at app startup to disable H/W acceleration and other optimizations
+  if IsShiftKeyPressed then //Hold down SHIFT key at app startup to disable H/W acceleration and other optimizations
   begin
     {$IF DEFINED(MSWINDOWS)}
     //GlobalUseDX10 := False; //use DX9 instead of DX10 (probably needs GlobalUseDX=true to do something)

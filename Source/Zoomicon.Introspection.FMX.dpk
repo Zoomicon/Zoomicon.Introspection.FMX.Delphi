@@ -35,9 +35,9 @@ requires
   {$IF DEFINED(MSWINDOWS)}
   CodeSiteExpressPkg,
   {$ENDIF}
-  ObjectDebuggerFMX,
-  Zoomicon.Helpers.RTL,
-  Zoomicon.Helpers.FMX;
+  ObjectDebuggerFMX{BOSS},
+  Zoomicon.Helpers.RTL{BOSS},
+  Zoomicon.Helpers.FMX{BOSS};
 
 contains
   Zoomicon.Introspection.FMX.StructureView in 'Zoomicon.Introspection.FMX.StructureView.pas' {StructureView: TFrame},
