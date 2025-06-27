@@ -11,6 +11,8 @@ object StructureView: TStructureView
     TabOrder = 0
     ParentShowHint = False
     ShowHint = True
+    OnDblClick = TreeViewDblClick
+    OnMouseDown = TreeViewMouseDown
     ItemHeight = 50.000000000000000000
     Images = ImageList
     OnChange = TreeViewChange

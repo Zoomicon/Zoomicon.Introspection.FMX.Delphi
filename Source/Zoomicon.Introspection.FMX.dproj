@@ -88,7 +88,7 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
         <SanitizedProjectName>Zoomicon_Introspection_FMX</SanitizedProjectName>
-        <DCC_UnitSearchPath>modules\.dcp;..\modules\.dcp;modules\.dcu;..\modules\.dcu;modules;..\modules;modules\object-debugger-for-firemonkey\DemoDesktop;..\modules\object-debugger-for-firemonkey\DemoDesktop;modules\object-debugger-for-firemonkey\DemoMobile;..\modules\object-debugger-for-firemonkey\DemoMobile;modules\object-debugger-for-firemonkey;..\modules\object-debugger-for-firemonkey;modules\object-debugger-for-firemonkey\Test;..\modules\object-debugger-for-firemonkey\Test;modules\zoomicon.helpers.fmx.delphi\Source;..\modules\zoomicon.helpers.fmx.delphi\Source;modules\zoomicon.helpers.rtl.delphi\Source;..\modules\zoomicon.helpers.rtl.delphi\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>..\modules\.dcp;..\modules\.dcu;..\modules;..\modules\object-debugger-for-firemonkey\DemoDesktop;..\modules\object-debugger-for-firemonkey\DemoMobile;..\modules\object-debugger-for-firemonkey;..\modules\object-debugger-for-firemonkey\Test;..\modules\zoomicon.helpers.fmx.delphi\Source;..\modules\zoomicon.helpers.rtl.delphi\Source;..\modules\.bpl;modules\.dcp;modules\.dcu;modules;modules\.bpl;modules\object-debugger-for-firemonkey\DemoDesktop;modules\object-debugger-for-firemonkey\DemoMobile;modules\object-debugger-for-firemonkey;modules\object-debugger-for-firemonkey\Test;modules\zoomicon.helpers.fmx.delphi\Source;modules\zoomicon.helpers.rtl.delphi\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_CBuilderOutput>None</DCC_CBuilderOutput>
@@ -212,6 +212,10 @@
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="Zoomicon.Introspection.FMX.Debugging.pas"/>
+        <None Include="..\boss.json"/>
+        <None Include="..\LICENSE"/>
+        <None Include="..\README.md"/>
+        <None Include="boss.json"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
