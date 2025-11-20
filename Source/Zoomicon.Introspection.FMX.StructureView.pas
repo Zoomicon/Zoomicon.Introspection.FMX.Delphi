@@ -543,6 +543,7 @@ implementation
       if Allow then
       begin
         SourceObject.BringToFront; //places last in the parent (corresponds to top in the Z-Order), as done for the TTreeViewItems by the TTreeView
+        //TODO: should check SHIFT key (or maybe ALT?) and if pressed should use SendToBack instead
 
         Restructured(SourceObject, SourceObjectParent, roReorderedChildren);
 

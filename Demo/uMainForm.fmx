@@ -40,7 +40,6 @@ object MainForm: TMainForm
         Size.PlatformDefault = False
         TabOrder = 1
         Text = 'Show Children'
-        TextSettings.Trimming = None
         OnClick = btnShowChildrenClick
       end
       inline HidableFrame1: THidableFrame
@@ -86,17 +85,5 @@ object MainForm: TMainForm
     Size.PlatformDefault = False
     StyleLookup = 'drawertoolbutton'
     Text = 'btnMenu'
-    TextSettings.Trimming = None
-  end
-  object MultiViewFrameStand: TFrameStand
-    AnimationShow = 'OnShow*'
-    AnimationHide = 'OnHide*'
-    CommonActionPrefix = 'ca_'
-    DefaultHideAndCloseDeferTimeMS = 100
-    DefaultStyleName = 'framestand'
-    DefaultStandName = 'framestand'
-    DefaultParent = MultiView
-    Left = 536
-    Top = 48
   end
 end

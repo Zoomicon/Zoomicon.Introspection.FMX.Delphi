@@ -1,14 +1,14 @@
 {
 	"name": "Introspection_Demo",
 	"description": "Zoomicon Introspection FMX Demo app",
-	"version": "1.0",
+	"version": "3.6",
 	"homepage": "https://github.com/Zoomicon/Zoomicon.Introspection.FMX.Delphi/Demo",
 	"mainsrc": ".",
 	"projects": [
 		"Introspection_Demo.dproj"
 	],
 	"dependencies": {
-		"github.com/zoomicon/zoomicon.helpers.rtl.delphi": ">=3.3.0",
-		"github.com/zoomicon/zoomicon.introspection.fmx.delphi": ">=3.5.0"
+		"github.com/zoomicon/zoomicon.helpers.rtl.delphi": ">=3.4.0",
+		"github.com/zoomicon/zoomicon.introspection.fmx.delphi": ">=3.6.0"
 	}
 }

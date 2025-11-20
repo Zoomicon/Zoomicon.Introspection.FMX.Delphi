@@ -20,8 +20,7 @@ uses
   FMX.MultiView,
   FMX.Layouts,
   //
-  SubjectStand, FrameStand, //needs TFrameStand (from GetIt Package Manager)
-  //
+  Zoomicon.Introspection.FMX.StructureView, //for TStructureView
   uHidableFrame;
 {$endregion}
 
@@ -35,10 +34,10 @@ type
     MainLayout: TLayout;
     HidableFrame2: THidableFrame;
     HidableFrame3: THidableFrame;
-    MultiViewFrameStand: TFrameStand;
     procedure btnShowChildrenClick(Sender: TObject);
     procedure MultiViewStartShowing(Sender: TObject);
   protected
+    FStructureView: TStructureView;
     procedure StructureViewSelection(Sender: TObject; const Selection: TObject);
   end;
 
@@ -46,7 +45,6 @@ var
   MainForm: TMainForm;
 
 implementation
-  uses Zoomicon.Introspection.FMX.StructureView; //for TStructureView
 
 {$R *.fmx}
 
@@ -64,16 +62,17 @@ end;
 
 procedure TMainForm.MultiViewStartShowing(Sender: TObject);
 begin
-  with MultiViewFrameStand do
+  if not Assigned(FStructureView) then
   begin
-    CloseAllExcept(TStructureView);
-    var info:= MultiViewFrameStand.GetFrameInfo<TStructureView>;
-    with info.Frame do
+    FStructureView:= TStructureView.Create(MultiView);
+    with FStructureView do
     begin
       GUIRoot := ContentLayout;
       OnSelection := StructureViewSelection;
+      Parent := MultiView;
+      Align := TAlignLayout.Client;
     end;
-    info.Show;
+    FStructureView.Visible := true;
   end;
 end;
 
