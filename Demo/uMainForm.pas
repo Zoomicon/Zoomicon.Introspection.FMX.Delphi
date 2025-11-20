@@ -69,10 +69,7 @@ begin
     begin
       GUIRoot := ContentLayout;
       OnSelection := StructureViewSelection;
-      Parent := MultiView;
-      Align := TAlignLayout.Client;
     end;
-    FStructureView.Visible := true;
   end;
 end;
 

@@ -42,7 +42,6 @@ object HidableFrame: THidableFrame
       Size.PlatformDefault = False
       TabOrder = 2
       Text = 'Show Children'
-      TextSettings.Trimming = None
       OnClick = btnShowChildrenClick
     end
     object UpdateTimer: TTimer
