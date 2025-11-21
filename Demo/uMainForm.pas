@@ -69,6 +69,9 @@ begin
     begin
       GUIRoot := ContentLayout;
       OnSelection := StructureViewSelection;
+
+      Align := TAlignLayout.Client;
+      Parent := MultiView;
     end;
   end;
 end;
