@@ -325,6 +325,9 @@ implementation
 
   function TStructureView.GetSelectedObject: TObject;
   begin
+    if not Assigned(TreeView) then
+      exit(nil); //can occur during destruction
+
     var selectedItem := TreeView.Selected;
     if Assigned(selectedItem) then
       result := selectedItem.TagObject
@@ -334,6 +337,9 @@ implementation
 
   procedure TStructureView.SetSelectedObject(const Value: TObject);
   begin
+    if not Assigned(TreeView) then
+      exit; //can occur during destruction
+
     if Assigned(Value) then
       TreeView.Selected := TreeView.FindObject(Value)
     else

@@ -48,13 +48,13 @@
     <ItemGroup Condition="'$(BuildGroup)'=='Android'">
         <BuildGroupProject Include="Demo\Introspection_Demo.dproj">
             <ProjectGuid>{C57CA401-A186-411F-AC4C-996E84FC9E11}</ProjectGuid>
-            <Configurations>Debug</Configurations>
+            <Configurations>Release</Configurations>
             <Platforms>Android;Android64</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
         <BuildGroupProject Include="Source\Zoomicon.Introspection.FMX.dproj">
             <ProjectGuid>{B42CA181-8650-490B-BB64-1D04F3C529A9}</ProjectGuid>
-            <Configurations>Debug</Configurations>
+            <Configurations>Release</Configurations>
             <Platforms>Android;Android64</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
@@ -62,13 +62,13 @@
     <ItemGroup Condition="'$(BuildGroup)'=='macOS'">
         <BuildGroupProject Include="Demo\Introspection_Demo.dproj">
             <ProjectGuid>{C57CA401-A186-411F-AC4C-996E84FC9E11}</ProjectGuid>
-            <Configurations>Debug</Configurations>
+            <Configurations>Release</Configurations>
             <Platforms>OSX64;OSXARM64</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
         <BuildGroupProject Include="Source\Zoomicon.Introspection.FMX.dproj">
             <ProjectGuid>{B42CA181-8650-490B-BB64-1D04F3C529A9}</ProjectGuid>
-            <Configurations>Debug</Configurations>
+            <Configurations>Release</Configurations>
             <Platforms>OSX64;OSXARM64</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
@@ -76,13 +76,13 @@
     <ItemGroup Condition="'$(BuildGroup)'=='All Platforms'">
         <BuildGroupProject Include="Demo\Introspection_Demo.dproj">
             <ProjectGuid>{C57CA401-A186-411F-AC4C-996E84FC9E11}</ProjectGuid>
-            <Configurations>Debug</Configurations>
+            <Configurations>Release</Configurations>
             <Platforms>Android;Android64;iOSDevice64;iOSSimARM64;OSX64;OSXARM64;Win32;Win64</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
         <BuildGroupProject Include="Source\Zoomicon.Introspection.FMX.dproj">
             <ProjectGuid>{B42CA181-8650-490B-BB64-1D04F3C529A9}</ProjectGuid>
-            <Configurations>Debug</Configurations>
+            <Configurations>Release</Configurations>
             <Platforms>Android;Android64;iOSDevice64;iOSSimARM64;OSX64;OSXARM64;Win32;Win64;Win64x</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
@@ -90,13 +90,13 @@
     <ItemGroup Condition="'$(BuildGroup)'=='iOS'">
         <BuildGroupProject Include="Demo\Introspection_Demo.dproj">
             <ProjectGuid>{C57CA401-A186-411F-AC4C-996E84FC9E11}</ProjectGuid>
-            <Configurations>Debug</Configurations>
+            <Configurations>Release</Configurations>
             <Platforms>iOSDevice64;iOSSimARM64</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
         <BuildGroupProject Include="Source\Zoomicon.Introspection.FMX.dproj">
             <ProjectGuid>{B42CA181-8650-490B-BB64-1D04F3C529A9}</ProjectGuid>
-            <Configurations>Debug</Configurations>
+            <Configurations>Release</Configurations>
             <Platforms>iOSDevice64;iOSSimARM64</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
@@ -104,13 +104,13 @@
     <ItemGroup Condition="'$(BuildGroup)'=='Windows'">
         <BuildGroupProject Include="Demo\Introspection_Demo.dproj">
             <ProjectGuid>{C57CA401-A186-411F-AC4C-996E84FC9E11}</ProjectGuid>
-            <Configurations>Debug</Configurations>
+            <Configurations>Release</Configurations>
             <Platforms>Win32;Win64</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
         <BuildGroupProject Include="Source\Zoomicon.Introspection.FMX.dproj">
             <ProjectGuid>{B42CA181-8650-490B-BB64-1D04F3C529A9}</ProjectGuid>
-            <Configurations>Debug</Configurations>
+            <Configurations>Release</Configurations>
             <Platforms>Win32;Win64;Win64x</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
