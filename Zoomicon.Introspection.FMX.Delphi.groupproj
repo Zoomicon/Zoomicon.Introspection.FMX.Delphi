@@ -129,4 +129,18 @@
             <Enabled>True</Enabled>
         </BuildGroupProject>
     </ItemGroup>
+    <ItemGroup Condition="'$(BuildGroup)'=='Linux'">
+        <BuildGroupProject Include="Demo\Introspection_Demo.dproj">
+            <ProjectGuid>{C57CA401-A186-411F-AC4C-996E84FC9E11}</ProjectGuid>
+            <Configurations>Release</Configurations>
+            <Platforms>Linux64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="Source\Zoomicon.Introspection.FMX.dproj">
+            <ProjectGuid>{B42CA181-8650-490B-BB64-1D04F3C529A9}</ProjectGuid>
+            <Configurations>Release</Configurations>
+            <Platforms>Linux64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+    </ItemGroup>
 </Project>
