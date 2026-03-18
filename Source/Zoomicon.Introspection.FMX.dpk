@@ -32,9 +32,9 @@ requires
   fmx,
   Skia.Package.RTL,
   Skia.Package.FMX,
-  Zoomicon.Helpers.RTL{BOSS},
   ObjectDebuggerFMX{BOSS},
-  Zoomicon.Helpers.FMX{BOSS};
+  Zoomicon.Helpers.FMX{BOSS},
+  Zoomicon.Helpers.RTL{BOSS};
 
 contains
   Zoomicon.Introspection.FMX.StructureView in 'Zoomicon.Introspection.FMX.StructureView.pas' {StructureView: TFrame},

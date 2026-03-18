@@ -77,13 +77,13 @@
         <BuildGroupProject Include="Demo\Introspection_Demo.dproj">
             <ProjectGuid>{C57CA401-A186-411F-AC4C-996E84FC9E11}</ProjectGuid>
             <Configurations>Release</Configurations>
-            <Platforms>Android;Android64;iOSDevice64;iOSSimARM64;OSX64;OSXARM64;Win32;Win64</Platforms>
+            <Platforms>Android;Android64;iOSDevice64;iOSSimARM64;Linux64;OSX64;OSXARM64;Win32;Win64</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
         <BuildGroupProject Include="Source\Zoomicon.Introspection.FMX.dproj">
             <ProjectGuid>{B42CA181-8650-490B-BB64-1D04F3C529A9}</ProjectGuid>
             <Configurations>Release</Configurations>
-            <Platforms>Android;Android64;iOSDevice64;iOSSimARM64;OSX64;OSXARM64;Win32;Win64;Win64x</Platforms>
+            <Platforms>Android;Android64;iOSDevice64;iOSSimARM64;Linux64;OSX64;OSXARM64;Win32;Win64;Win64x</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
     </ItemGroup>
@@ -112,6 +112,20 @@
             <ProjectGuid>{B42CA181-8650-490B-BB64-1D04F3C529A9}</ProjectGuid>
             <Configurations>Release</Configurations>
             <Platforms>Win32;Win64;Win64x</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+    </ItemGroup>
+    <ItemGroup Condition="'$(BuildGroup)'=='All Platforms (not Linux)'">
+        <BuildGroupProject Include="Demo\Introspection_Demo.dproj">
+            <ProjectGuid>{C57CA401-A186-411F-AC4C-996E84FC9E11}</ProjectGuid>
+            <Configurations>Release</Configurations>
+            <Platforms>Android;Android64;iOSDevice64;iOSSimARM64;OSX64;OSXARM64;Win32;Win64</Platforms>
+            <Enabled>True</Enabled>
+        </BuildGroupProject>
+        <BuildGroupProject Include="Source\Zoomicon.Introspection.FMX.dproj">
+            <ProjectGuid>{B42CA181-8650-490B-BB64-1D04F3C529A9}</ProjectGuid>
+            <Configurations>Release</Configurations>
+            <Platforms>Android;Android64;iOSDevice64;iOSSimARM64;OSX64;OSXARM64;Win32;Win64;Win64x</Platforms>
             <Enabled>True</Enabled>
         </BuildGroupProject>
     </ItemGroup>
